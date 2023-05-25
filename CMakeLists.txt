@@ -4,4 +4,10 @@ set(BOARD nrf52dk_nrf52832)
 find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
 project(CE_recruitment)
 
-target_sources(app PRIVATE src/main.c)
+include_directories(inc)
+
+target_sources(app PRIVATE
+		src/main.c
+		src/blinkThread.c
+		src/pwmThread.c
+)
