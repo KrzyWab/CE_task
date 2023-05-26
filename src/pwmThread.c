@@ -3,6 +3,7 @@
 #include <zephyr/sys/printk.h>
 
 #include "pwmThread.h"
+#include "oledDisplay.h"
 
 #define NUM_STEPS	50U
 #define SLEEP_MSEC	30U
@@ -25,6 +26,9 @@ void pwmThread_entry(void)
 	{
 		return;
 	}
+
+	oledDisplay_init();
+	oledDisplay_test();
 
 	printk("PWM thread entry\n");
 

@@ -10,4 +10,5 @@ target_sources(app PRIVATE
 		src/main.c
 		src/blinkThread.c
 		src/pwmThread.c
+		src/oledDisplay.c
 )
