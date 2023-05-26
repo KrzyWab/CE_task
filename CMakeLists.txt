@@ -9,6 +9,7 @@ include_directories(inc)
 target_sources(app PRIVATE
 		src/main.c
 		src/blinkThread.c
-		src/pwmThread.c
+		src/displayThread.c
 		src/oledDisplay.c
+		src/fadingLed.c
 )
