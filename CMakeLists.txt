@@ -12,4 +12,5 @@ target_sources(app PRIVATE
 		src/displayThread.c
 		src/oledDisplay.c
 		src/fadingLed.c
+		src/measThread.c
 )
