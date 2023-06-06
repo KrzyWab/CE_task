@@ -35,6 +35,10 @@ void displayThread_entry(void)
 		}
 		else
 		{
+			oledDisplay_clear();
+			oledDisplay_showRange(dataBuff->rangeMeas, dataBuff->rangeError);
+			oledDisplay_showAls(dataBuff->alsMeas, dataBuff->alsError);
+			oledDisplay_update();
 			//TODO Display measurements data on OLED and with PWM LED
 			LOG_DBG("R: %d %u; A: %u %u",
 					dataBuff->rangeMeas,

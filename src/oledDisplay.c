@@ -5,9 +5,17 @@
 
 #include "oledDisplay.h"
 
-#define MAX_FONTS  42
+#define MAX_FONTS  5
 
 #define SELECTED_FONT_INDEX  0
+
+#define RANGE_TEXT_SIZE		15
+#define RANGE_TEXT_POS_X	0
+#define RANGE_TEXT_POS_Y	0
+
+#define ALS_TEXT_SIZE		15
+#define ALS_TEXT_POS_X		0
+#define ALS_TEXT_POS_Y		20
 
 LOG_MODULE_REGISTER(display, LOG_LEVEL_DBG);
 
@@ -76,6 +84,44 @@ int oledDisplay_init(void)
 			cfb_get_display_parameter(displayDev, CFB_DISPLAY_COLS));
 
 	return 0;
+}
+
+void oledDisplay_clear(void)
+{
+	cfb_framebuffer_clear(displayDev, false);
+}
+
+void oledDisplay_update(void)
+{
+	cfb_framebuffer_finalize(displayDev);
+}
+
+void oledDisplay_showRange(int32_t range_mm, uint32_t errorCode)
+{
+	char text[RANGE_TEXT_SIZE]={0};
+	if(errorCode)
+		snprintfcb(text, RANGE_TEXT_SIZE, "Range: E%u", errorCode);
+	else
+		snprintfcb(text, RANGE_TEXT_SIZE, "Range: %d", range_mm);
+
+	if(cfb_print(displayDev, text, RANGE_TEXT_POS_X, RANGE_TEXT_POS_Y))
+	{
+		LOG_ERR("Cannot display text that has been sent");
+	}
+}
+
+void oledDisplay_showAls(uint32_t lux, uint32_t errorCode)
+{
+	char text[ALS_TEXT_SIZE]={0};
+	if(errorCode)
+		snprintfcb(text, ALS_TEXT_SIZE, "ALS: E%u", errorCode);
+	else
+		snprintfcb(text, ALS_TEXT_SIZE, "ALS: %d", lux);
+
+	if(cfb_print(displayDev, text, ALS_TEXT_POS_X, ALS_TEXT_POS_Y))
+	{
+		LOG_ERR("Cannot display text that has been sent");
+	}
 }
 
 void oledDisplay_test(void)
