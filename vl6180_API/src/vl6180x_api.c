@@ -1747,7 +1747,7 @@ done:
 
 int VL6180x_RangeIgnoreSetEnable(VL6180xDev_t dev, int EnableState){
 	int CurEnable;
-	int status;
+	int status = 0;
 	LOG_FUNCTION_START("enable %d", EnableState);
 
 	if( EnableState )
