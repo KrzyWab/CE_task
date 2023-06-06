@@ -19,4 +19,5 @@ target_sources(app PRIVATE
 		src/measThread.c
 		vl6180_API/src/vl6180x_api.c
 		vl6180_API/cci-i2c/vl6180x_i2c.c
+		src/rangeMeter.c
 )
