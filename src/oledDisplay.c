@@ -9,7 +9,7 @@
 
 #define SELECTED_FONT_INDEX  0
 
-LOG_MODULE_REGISTER(display);
+LOG_MODULE_REGISTER(display, LOG_LEVEL_DBG);
 
 static const struct device *displayDev = DEVICE_DT_GET(DT_NODELABEL(ssd1306));
 static uint8_t font_width;
@@ -38,12 +38,12 @@ int oledDisplay_init(void)
 	struct display_capabilities capabilities;
 	display_get_capabilities(displayDev, &capabilities);
 
-	LOG_INF("x_resolution: %d", capabilities.x_resolution);
-	LOG_INF("y_resolution: %d", capabilities.y_resolution);
-	LOG_INF("supported pixel formats: %d", capabilities.supported_pixel_formats);
-	LOG_INF("screen_info: %d", capabilities.screen_info);
-	LOG_INF("current_pixel_format: %d", capabilities.current_pixel_format);
-	LOG_INF("current_orientation: %d", capabilities.current_orientation);
+	LOG_DBG("x_resolution: %d", capabilities.x_resolution);
+	LOG_DBG("y_resolution: %d", capabilities.y_resolution);
+	LOG_DBG("supported pixel formats: %d", capabilities.supported_pixel_formats);
+	LOG_DBG("screen_info: %d", capabilities.screen_info);
+	LOG_DBG("current_pixel_format: %d", capabilities.current_pixel_format);
+	LOG_DBG("current_orientation: %d", capabilities.current_orientation);
 
 	if (cfb_framebuffer_init(displayDev))
 	{
@@ -61,14 +61,14 @@ int oledDisplay_init(void)
 	for (int idx = 0; idx < maxFonts; idx++)
 	{
 		cfb_get_font_size(displayDev, idx, &font_width, &font_height);
-		LOG_INF("index[%d] font width %d, font height %d",
+		LOG_DBG("index[%d] font width %d, font height %d",
 				idx, font_width, font_height);
 	}
 
 	cfb_framebuffer_set_font(displayDev, SELECTED_FONT_INDEX);
-	LOG_INF("selected font: index[%d]", SELECTED_FONT_INDEX);
+	LOG_DBG("selected font: index[%d]", SELECTED_FONT_INDEX);
 
-	LOG_INF("Framebuffer params: x_res %d, y_res %d, ppt %d, rows %d, cols %d",
+	LOG_DBG("Framebuffer params: x_res %d, y_res %d, ppt %d, rows %d, cols %d",
 			cfb_get_display_parameter(displayDev, CFB_DISPLAY_WIDTH),
 			cfb_get_display_parameter(displayDev, CFB_DISPLAY_HEIGH),
 			cfb_get_display_parameter(displayDev, CFB_DISPLAY_PPT),

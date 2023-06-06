@@ -7,7 +7,7 @@
 #include "oledDisplay.h"
 #include "dataQueue.h"
 
-LOG_MODULE_REGISTER(displayThread);
+LOG_MODULE_REGISTER(displayThread, LOG_LEVEL_DBG);
 
 /* This thread is controlling displaying data taken from measurements */
 void displayThread_entry(void)
@@ -31,12 +31,12 @@ void displayThread_entry(void)
 		if(dataBuff->initError)
 		{
 			//TODO Display VL6180x init error on OLED
-			LOG_INF("VL6180x init error");
+			LOG_ERR("VL6180x init error");
 		}
 		else
 		{
 			//TODO Display measurements data on OLED and with PWM LED
-			LOG_INF("R: %d %u; A: %u %u",
+			LOG_DBG("R: %d %u; A: %u %u",
 					dataBuff->rangeMeas,
 					dataBuff->rangeError,
 					dataBuff->alsMeas,
@@ -44,7 +44,4 @@ void displayThread_entry(void)
 		}
 		k_free(dataBuff);
 	}
-
-	oledDisplay_test();
-	fadingLed_test();
 }

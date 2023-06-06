@@ -69,6 +69,7 @@ int rangemeter_init()
 		LOG_ERR("Rangemeter not prepared, err: %d", ret);
 		return -1;
 	}
+	LOG_INF("VL6180x initialized succesfully");
 	return 0;
 }
 

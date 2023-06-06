@@ -8,7 +8,7 @@
 
 static const struct device *i2c_dev = DEVICE_DT_GET(DT_NODELABEL(i2c0));
 
-LOG_MODULE_REGISTER(measThread);
+LOG_MODULE_REGISTER(measThread, LOG_LEVEL_DBG);
 
 void measThread_entry(void)
 {
@@ -38,6 +38,7 @@ void measThread_entry(void)
 		k_fifo_put(&rangeDataFifo, dataBuff);
 		k_sleep(K_FOREVER);
 	}
+	LOG_INF("measThread initialized");
 
 	dataBuff = NULL;
 	VL6180x_RangeData_t rangeData;
@@ -49,7 +50,7 @@ void measThread_entry(void)
 		rangemeter_alsMeas(&alsData);
 
 		
-		LOG_INF("R: %d %u; A: %u %u",
+		LOG_DBG("R: %d %u; A: %u %u",
 				rangeData.range_mm,
 				rangeData.errorStatus,
 				alsData.lux,
@@ -68,7 +69,4 @@ void measThread_entry(void)
 
 		k_msleep(500);
 	}
-
-	k_sleep(K_FOREVER);
-
 }
