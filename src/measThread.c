@@ -67,6 +67,6 @@ void measThread_entry(void)
 		memcpy(dataBuff, &rangeDataQNode, sizeof(struct rangeDataFifoNode_t));
 		k_fifo_put(&rangeDataFifo, dataBuff);
 
-		k_msleep(500);
+		k_msleep(100);
 	}
 }

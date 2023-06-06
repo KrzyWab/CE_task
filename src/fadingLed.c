@@ -7,6 +7,8 @@
 #define TEST_NUM_STEPS		100U
 #define TEST_SLEEP_MSEC		20U
 
+#define RANGE_MEAS_NUM_STEPS	200		// Maximum range_mm value possible for VL6180x
+
 #define PWM_DIRECTION_BRIGHTEN	1U
 #define PWM_DIRECTION_DARKEN	0U
 
@@ -27,6 +29,27 @@ int fadingLed_init()
 		return -1;
 	}
 	return 0;
+}
+
+void fadingLed_showRange(int32_t range_mm, uint32_t errorCode)
+{
+	pulseWidth = 0;
+	if(errorCode)
+	{
+		if (pwm_set_pulse_dt(&pwm_led0, pulseWidth))
+		{
+			LOG_ERR("Cannot set PWM width value to fading LED");
+		}
+		return;
+	}
+
+	step = pwm_led0.period / RANGE_MEAS_NUM_STEPS;
+	pulseWidth = (RANGE_MEAS_NUM_STEPS - range_mm) * step;
+
+	if (pwm_set_pulse_dt(&pwm_led0, pulseWidth))
+	{
+		LOG_ERR("Cannot set PWM width value to fading LED");
+	}
 }
 
 void fadingLed_test()
