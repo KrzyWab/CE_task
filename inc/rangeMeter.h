@@ -3,12 +3,8 @@
 
 #include "vl6180x_def.h"
 
-typedef struct {
-	VL6180x_RangeData_t rangeData;
-	VL6180x_AlsData_t alsData;
-} rangeMeterData_t;
-
 int rangemeter_init();
-void rangemeter_rangeMeas();
+void rangemeter_rangeMeas(VL6180x_RangeData_t *rangeData);
+void rangemeter_alsMeas(VL6180x_AlsData_t *alsData);
 
 #endif /* __RANGE_METER_H */

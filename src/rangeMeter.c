@@ -9,7 +9,6 @@ LOG_MODULE_REGISTER(rangeMeter);
 
 static const struct device *i2c_dev = DEVICE_DT_GET(DT_NODELABEL(i2c0));
 static VL6180xDev_t rangeMeterDev;
-static rangeMeterData_t rangeMeterData;
 
 /*
  * Wrapper used by vl6180x_api as a part of porting it to other projects
@@ -73,8 +72,14 @@ int rangemeter_init()
 	return 0;
 }
 
-void rangemeter_rangeMeas()
+void rangemeter_rangeMeas(VL6180x_RangeData_t *rangeData)
 {
-	int ret = VL6180x_RangePollMeasurement(rangeMeterDev, &(rangeMeterData.rangeData));
-	LOG_INF("Range measurement function ret=%d; distance=%u; error=%u", ret, (uint32_t)(rangeMeterData.rangeData.range_mm), (uint32_t)(rangeMeterData.rangeData.errorStatus));
+	VL6180x_RangePollMeasurement(rangeMeterDev, rangeData);
+}
+
+void rangemeter_alsMeas(VL6180x_AlsData_t *alsData)
+{
+#if VL6180x_ALS_SUPPORT
+	VL6180x_AlsPollMeasurement(rangeMeterDev, alsData);
+#endif
 }
