@@ -19,6 +19,7 @@ OLED display and VL6180X sensor share same I2C bus. Connections:
 | GND | GND |
 | P0.27 | SCL |
 | P0.26 | SDA |
+
 Both SDA and SCL are pulled up with 4k7 resistors on nRF52-DK board.
 
 ## Development environment
@@ -69,13 +70,24 @@ nrfjprog --reset
 
 ## Useful links
 [Zephyr OS docs: Getting started guide](https://docs.zephyrproject.org/latest/develop/getting_started/index.html)
+
 [Zephyr OS docs: nRF52 DK Overwiev](https://docs.zephyrproject.org/latest/boards/arm/nrf52dk_nrf52832/doc/index.html)
+
 [Zephyr OS dosc: Application development](https://docs.zephyrproject.org/latest/develop/application/index.html)
+
 [Zephyr OS docs: HW support - Peripherials](https://docs.zephyrproject.org/latest/hardware/peripherals/index.html)
+
 [Zephyr OS docs: Build and Configuration Systems](https://docs.zephyrproject.org/latest/build/index.html)
+
 [Zephyr OS docs: Kernel Services](https://docs.zephyrproject.org/latest/kernel/services/index.html)
+
 [Zephyr OS docs: SSD1306 I2C driver support](https://docs.zephyrproject.org/latest/build/dts/api/bindings/display/solomon%2Cssd1306fb-i2c.html#dtbinding-solomon-ssd1306fb-i2c)
+
 [VL6180x Datasheet](https://www.st.com/resource/en/datasheet/vl6180x.pdf)
+
 [VL6180x Application Note](https://www.st.com/resource/en/application_note/an4545-vl6180x-basic-ranging-application-note-stmicroelectronics.pdf)
+
 [VL6180x API](https://www.st.com/en/embedded-software/stsw-img003)
+
 [SSD1306 Datasheet](https://cdn-shop.adafruit.com/datasheets/SSD1306.pdf)
+
