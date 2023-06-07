@@ -80,7 +80,5 @@ void rangemeter_rangeMeas(VL6180x_RangeData_t *rangeData)
 
 void rangemeter_alsMeas(VL6180x_AlsData_t *alsData)
 {
-#if VL6180x_ALS_SUPPORT
 	VL6180x_AlsPollMeasurement(rangeMeterDev, alsData);
-#endif
 }
