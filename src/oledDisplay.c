@@ -124,6 +124,14 @@ void oledDisplay_showAls(uint32_t lux, uint32_t errorCode)
 	}
 }
 
+void oledDisplay_showInitError(void)
+{
+	if(cfb_print(displayDev, "ERROR!\nVL6180x init\nfailed", 0, 0))
+	{
+		LOG_ERR("Cannot display text that has been sent");
+	}
+}
+
 void oledDisplay_test(void)
 {
 	cfb_framebuffer_clear(displayDev, false);
